@@ -3,4 +3,7 @@ __pycache__/
 *.pyo
 .venv/
 env/
+build/
+dist/
+*.spec
 

@@ -52,13 +52,20 @@ As crianças pequenas carregam em todas as teclas aleatoriamente, incluindo no `
 
 ## 🚀 Como Iniciar
 
-### Opção 1 (Mais fácil):
+### Opção 1: Executável Portátil (Sem Instalação)
+Copie e execute diretamente o ficheiro único (não requer Python nem instalação):
+```text
+dist\TecladoMagico.exe
+```
+*(Para recompilar o `.exe` a partir do código-fonte, basta executar `build_exe.bat`)*
+
+### Opção 2: Via Script Rápido
 Dê um duplo clique no ficheiro:
 ```bat
 iniciar.bat
 ```
 
-### Opção 2 (Via Linha de Comandos):
+### Opção 3: Via Linha de Comandos
 ```powershell
 python main.py
 ```
