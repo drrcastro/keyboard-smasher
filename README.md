@@ -1,5 +1,7 @@
 # 🌟 Mundo Mágico do Teclado (Keyboard Smasher)
 
+![Mundo Mágico do Teclado](preview.png)
+
 Uma aplicação interativa concebida para crianças pequenas brincarem livremente com o teclado e o rato do computador, com animações encantadoras, cores dinâmicas e efeitos sonoros harmoniosos, cobrindo **todos os monitores** em simultâneo.
 
 ---
