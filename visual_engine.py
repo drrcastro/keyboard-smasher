@@ -371,7 +371,7 @@ class MonitorScreen:
             b.update(dt)
         self.badges = [b for b in self.badges if b.alive]
 
-    def render(self, esc_ratio=0.0, show_welcome=False):
+    def render(self, esc_ratio=0.0, show_welcome=False, capture=False):
         """Desenha todos os elementos com aceleração GPU."""
         ren = self.renderer
         # 1. Limpa fundo com cor interpolada
@@ -428,8 +428,13 @@ class MonitorScreen:
         if show_welcome and self.is_primary:
             self._render_welcome_banner()
 
+        captured = None
+        if capture:
+            captured = ren.to_surface()
+
         # Apresenta frame na janela
         ren.present()
+        return captured
 
     def _get_ui_text(self, text, font_size, color=(255, 255, 255)):
         """Cache para textos de interface."""
