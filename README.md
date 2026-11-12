@@ -67,3 +67,4 @@ python main.py
 - **Python 3.10+** (já instalado no sistema)
 - **pygame-ce** (instalado automaticamente pelo `iniciar.bat` ou via `pip install pygame-ce`)
 - Suporta Windows 10 e Windows 11 com múltiplos monitores.
+

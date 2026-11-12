@@ -362,3 +362,4 @@ class KeyboardSmasherApp:
 if __name__ == '__main__':
     app = KeyboardSmasherApp()
     app.run()
+

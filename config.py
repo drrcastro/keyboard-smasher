@@ -66,3 +66,4 @@ PARTICLE_COLORS = [
     (255, 215, 0),    # Dourado
     (100, 255, 218),  # Turquesa claro
 ]
+

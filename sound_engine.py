@@ -204,3 +204,4 @@ class SoundEngine:
     def volume_down(self):
         self.set_volume(self.volume - 0.1)
         return self.volume
+
