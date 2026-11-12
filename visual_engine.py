@@ -421,7 +421,10 @@ class MonitorScreen:
         if esc_ratio > 0.05 and self.is_primary:
             self._render_exit_prompt(esc_ratio)
 
-        # 7. Mensagem inicial de boas-vindas
+        # 7. Atalho permanente no canto para desbloquear a aplicação
+        self._render_unlock_hint()
+
+        # 8. Mensagem inicial de boas-vindas
         if show_welcome and self.is_primary:
             self._render_welcome_banner()
 
@@ -438,6 +441,40 @@ class MonitorScreen:
         tex = Texture.from_surface(self.renderer, s)
         self.ui_text_cache[key] = (tex, s.get_width(), s.get_height())
         return self.ui_text_cache[key]
+
+    def _render_unlock_hint(self):
+        """Exibe num canto o atalho para desbloquear a aplicação."""
+        if not hasattr(self, '_unlock_badge_tex') or self._unlock_badge_tex is None:
+            font_size = int(16 * self.scale)
+            font = pygame.font.SysFont('Arial', font_size, bold=True)
+            font_emoji = pygame.font.SysFont('segoeuiemoji', font_size)
+
+            txt1 = font_emoji.render('🔒', True, (255, 255, 255))
+            txt2 = font.render(' Desbloquear: Segurar ESC (2s) | Ctrl+Shift+Q', True, (235, 245, 255))
+
+            pad_x = int(14 * self.scale)
+            pad_y = int(8 * self.scale)
+            w = txt1.get_width() + txt2.get_width() + pad_x * 2
+            h = max(txt1.get_height(), txt2.get_height()) + pad_y * 2
+
+            surf = pygame.Surface((w, h), pygame.SRCALPHA)
+            radius = int(h * 0.35)
+            # Fundo suave translúcido para não distrair as crianças mas legível para os pais
+            pygame.draw.rect(surf, (15, 20, 35, 185), (0, 0, w, h), border_radius=radius)
+            pygame.draw.rect(surf, (110, 180, 255, 190), (0, 0, w, h), width=max(2, int(2 * self.scale)), border_radius=radius)
+
+            surf.blit(txt1, (pad_x, (h - txt1.get_height()) // 2))
+            surf.blit(txt2, (pad_x + txt1.get_width(), (h - txt2.get_height()) // 2))
+
+            self._unlock_badge_tex = Texture.from_surface(self.renderer, surf)
+            self._unlock_badge_w = w
+            self._unlock_badge_h = h
+
+        # Posiciona no canto superior direito
+        bx = self.w - self._unlock_badge_w - int(20 * self.scale)
+        by = int(16 * self.scale)
+        dst = pygame.Rect(bx, by, self._unlock_badge_w, self._unlock_badge_h)
+        self._unlock_badge_tex.draw(dstrect=dst)
 
     def _render_exit_prompt(self, ratio):
         """Desenha barra de progresso elegante quando o pai/mãe segura ESC."""
